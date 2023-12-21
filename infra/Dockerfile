@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:1.6.5
+FROM zenika/terraform-azure-cli:latest
 
 WORKDIR /src
 
