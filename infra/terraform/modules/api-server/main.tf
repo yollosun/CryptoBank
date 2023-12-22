@@ -1,3 +1,13 @@
+resource "tls_private_key" "private_key" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
+resource "local_file" "public_key" {
+  content  = tls_private_key.private_key.public_key_openssh
+  filename = "azure_ssh_key.pub"
+}
+
 resource "azurerm_linux_virtual_machine" "api_server" {
   name                = var.name
   resource_group_name = var.resource_group_name
@@ -9,6 +19,11 @@ resource "azurerm_linux_virtual_machine" "api_server" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
+  }
+
+  admin_ssh_key {
+    username   = var.admin_username
+    public_key = "${local_file.public_key.content}"
   }
 
   source_image_reference {
