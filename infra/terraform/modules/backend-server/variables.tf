@@ -25,3 +25,11 @@ variable "subnet_id" {
 variable "public_key"{
   type = string
 }
+
+variable "private_ip_address" {
+  type = string
+}
+
+variable "shared_network_interface_id" {
+  type = string
+}
