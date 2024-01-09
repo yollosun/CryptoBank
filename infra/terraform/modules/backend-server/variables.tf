@@ -29,7 +29,3 @@ variable "public_key"{
 variable "private_ip_address" {
   type = string
 }
-
-variable "shared_network_interface_id" {
-  type = string
-}

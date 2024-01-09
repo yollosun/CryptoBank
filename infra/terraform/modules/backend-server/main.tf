@@ -90,7 +90,7 @@ resource "azurerm_linux_virtual_machine" "backend_server" {
   size                = var.size
   admin_username = var.admin_username
 
-  network_interface_ids = [var.shared_network_interface_id, azurerm_network_interface.backend_network_interface.id]
+  network_interface_ids = [azurerm_network_interface.backend_network_interface.id]
 
   os_disk {
     caching              = "ReadWrite"
