@@ -17,25 +17,26 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.0.0.0/16"]
 }
 
-resource "azurerm_network_interface" "network_interface" {
-  name                = "main_network_interface"
-  location            = azurerm_resource_group.crypto_bank.location
-  resource_group_name = azurerm_resource_group.crypto_bank.name
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
+resource "tls_private_key" "private_key" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
 }
 
-module "api_server_1" {
-  source = "./modules/api-server"
+resource "local_file" "public_key" {
+  content  = tls_private_key.private_key.public_key_openssh
+  filename = "azure_ssh_key.pub"
+}
 
-  name = "api1"
+module "backend_server_1" {
+  source = "./modules/backend-server"
+
+  name = "backend_server_1"
   resource_group_name = azurerm_resource_group.crypto_bank.name
-  location = "West Europe"
+  location = azurerm_resource_group.crypto_bank.location
   size = "Standard_F2"
   admin_username = "adminuser"
-  network_interface_ids = [azurerm_network_interface.network_interface.id]
+
+  subnet_id = azurerm_subnet.subnet.id
+
+  public_key = "${local_file.public_key.content}"
 }

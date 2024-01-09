@@ -18,6 +18,10 @@ variable "admin_username" {
   type = string
 }
 
-variable "network_interface_ids" {
-  type = list(string)
+variable "subnet_id" {
+  type = string
+}
+
+variable "public_key"{
+  type = string
 }
