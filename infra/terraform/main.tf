@@ -52,6 +52,8 @@ module "backend_server_1" {
   subnet_id = azurerm_subnet.subnet.id
   private_ip_address = "10.0.1.254"
 
+  clients_address_prefixes = ["10.0.1.252/32"]
+
   public_key = "${local_file.public_key.content}"
 }
 
@@ -69,7 +71,23 @@ module "database_server_1" {
   subnet_id = azurerm_subnet.subnet.id
   private_ip_address = "10.0.1.253"
   
-  servers_address_prefixes = ["10.0.1.254"]
+  servers_address_prefixes = ["10.0.1.254/32"]
+
+  public_key = "${local_file.public_key.content}"
+}
+
+module "frontend_server_1" {
+  source = "./modules/frontend-server"
+
+  name = "frontend-server-1"
+  resource_group_name = azurerm_resource_group.crypto_bank.name
+  location = azurerm_resource_group.crypto_bank.location
+
+  size = "Standard_F2"
+  admin_username = "adminuser"
+
+  subnet_id = azurerm_subnet.subnet.id
+  private_ip_address = "10.0.1.252"
 
   public_key = "${local_file.public_key.content}"
 }

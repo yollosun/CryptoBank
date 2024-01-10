@@ -29,3 +29,7 @@ variable "public_key"{
 variable "private_ip_address" {
   type = string
 }
+
+variable "clients_address_prefixes" {
+  type = list(string)
+}

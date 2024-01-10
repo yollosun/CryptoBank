@@ -4,9 +4,9 @@ resource "azurerm_network_security_group" "database_nsg" {
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = "allow-server-ip"
+    name                       = "allow-servers-ips"
     priority                   = 100
-    direction                  = "Outbound"
+    direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = var.port
