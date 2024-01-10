@@ -7,7 +7,7 @@ module "shared_firewall"{
 
 resource "azurerm_resource_group" "crypto_bank" {
   name     = "crypto-bank-resources"
-  location = "West Europe"
+  location = "East Asia"
 }
 
 resource "azurerm_virtual_network" "network" {
@@ -65,7 +65,7 @@ module "database_server_1" {
   resource_group_name = azurerm_resource_group.crypto_bank.name
   location = azurerm_resource_group.crypto_bank.location
 
-  size = "Standard_F2"
+  size = "Standard_F1"
   admin_username = "adminuser"
 
   subnet_id = azurerm_subnet.subnet.id
@@ -83,7 +83,7 @@ module "frontend_server_1" {
   resource_group_name = azurerm_resource_group.crypto_bank.name
   location = azurerm_resource_group.crypto_bank.location
 
-  size = "Standard_F2"
+  size = "Standard_F1"
   admin_username = "adminuser"
 
   subnet_id = azurerm_subnet.subnet.id
