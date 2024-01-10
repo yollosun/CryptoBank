@@ -54,3 +54,22 @@ module "backend_server_1" {
 
   public_key = "${local_file.public_key.content}"
 }
+
+module "database_server_1" {
+  source = "./modules/database-server"
+
+  name = "pg-database-server-1"
+  port = "5432"
+  resource_group_name = azurerm_resource_group.crypto_bank.name
+  location = azurerm_resource_group.crypto_bank.location
+
+  size = "Standard_F2"
+  admin_username = "adminuser"
+
+  subnet_id = azurerm_subnet.subnet.id
+  private_ip_address = "10.0.1.253"
+  
+  servers_address_prefixes = ["10.0.1.254"]
+
+  public_key = "${local_file.public_key.content}"
+}
