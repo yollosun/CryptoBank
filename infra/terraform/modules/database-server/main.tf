@@ -40,7 +40,7 @@ resource "azurerm_linux_virtual_machine" "database_server" {
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.size
-  admin_username = var.admin_username
+  admin_username      = var.admin_username
 
   network_interface_ids = [azurerm_network_interface.database_network_interface.id]
 

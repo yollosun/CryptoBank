@@ -22,7 +22,7 @@ resource "azurerm_network_security_group" "backend_nsg" {
     access                     = "Allow"
     protocol                   = "Udp"
     source_port_range          = "80"
-    source_address_prefixes      = var.clients_address_prefixes
+    source_address_prefixes    = var.clients_address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -34,7 +34,7 @@ resource "azurerm_network_security_group" "backend_nsg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "443"
-    source_address_prefixes      = var.clients_address_prefixes
+    source_address_prefixes    = var.clients_address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -88,7 +88,7 @@ resource "azurerm_linux_virtual_machine" "backend_server" {
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.size
-  admin_username = var.admin_username
+  admin_username      = var.admin_username
 
   network_interface_ids = [azurerm_network_interface.backend_network_interface.id]
 

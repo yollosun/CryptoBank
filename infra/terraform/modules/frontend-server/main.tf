@@ -120,7 +120,7 @@ resource "azurerm_linux_virtual_machine" "frontend_server" {
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.size
-  admin_username = var.admin_username
+  admin_username      = var.admin_username
 
   network_interface_ids = [azurerm_network_interface.frontend_network_interface.id]
 
