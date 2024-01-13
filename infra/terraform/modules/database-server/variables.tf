@@ -30,7 +30,7 @@ variable "private_ip_address" {
   type = string
 }
 
-variable "servers_address_prefixes" {
+variable "clients_address_prefixes" {
   type = list(string)
 }
 

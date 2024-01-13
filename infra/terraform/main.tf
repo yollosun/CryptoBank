@@ -71,7 +71,7 @@ module "database_server_1" {
   subnet_id = azurerm_subnet.subnet.id
   private_ip_address = "10.0.1.253"
   
-  servers_address_prefixes = ["10.0.1.254/32"]
+  clients_address_prefixes = ["10.0.1.254/32"]
 
   public_key = "${local_file.public_key.content}"
 }

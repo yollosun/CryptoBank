@@ -10,7 +10,7 @@ resource "azurerm_network_security_group" "database_nsg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = var.port
-    source_address_prefixes    = var.servers_address_prefixes
+    source_address_prefixes    = var.clients_address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
