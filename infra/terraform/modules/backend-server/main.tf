@@ -60,7 +60,7 @@ resource "azurerm_network_security_group" "backend_nsg" {
     source_port_range          = "*"
     source_address_prefix      = "*"
     destination_port_range     = "5432"
-    destination_address_prefix = "10.0.1.253/32"
+    destination_address_prefix = var.database_address_prefix
   }
 }
 

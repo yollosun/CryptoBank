@@ -53,6 +53,7 @@ module "backend_server_1" {
   private_ip_address = "10.0.1.254"
 
   clients_address_prefixes = ["10.0.1.252/32"]
+  database_address_prefix = "10.0.1.253/32"
 
   public_key = "${local_file.public_key.content}"
 }

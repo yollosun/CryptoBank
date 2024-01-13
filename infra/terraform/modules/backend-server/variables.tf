@@ -33,3 +33,7 @@ variable "private_ip_address" {
 variable "clients_address_prefixes" {
   type = list(string)
 }
+
+variable "database_address_prefix"{
+  type = string
+}
