@@ -9,9 +9,9 @@ resource "azurerm_network_security_group" "database_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
-    source_port_range          = var.port
+    source_port_range          = "*"
     source_address_prefixes    = var.clients_address_prefixes
-    destination_port_range     = "*"
+    destination_port_range     = var.port
     destination_address_prefix = "*"
   }
 }

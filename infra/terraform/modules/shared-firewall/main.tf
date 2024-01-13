@@ -9,9 +9,9 @@ resource "azurerm_network_security_group" "shared_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
-    source_port_range          = "22"
+    source_port_range          = "*"
     source_address_prefix      = "0.0.0.0/0"
-    destination_port_range     = "*"
+    destination_port_range     = "22"
     destination_address_prefix = "*"
   }
   security_rule {
@@ -20,9 +20,9 @@ resource "azurerm_network_security_group" "shared_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
-    source_port_range          = "22"
+    source_port_range          = "*"
     source_address_prefix      = "::/0"
-    destination_port_range     = "*"
+    destination_port_range     = "22"
     destination_address_prefix = "*"
   }
 

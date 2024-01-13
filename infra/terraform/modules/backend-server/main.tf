@@ -9,9 +9,9 @@ resource "azurerm_network_security_group" "backend_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
-    source_port_range          = "80"
+    source_port_range          = "*"
     source_address_prefixes    = var.clients_address_prefixes
-    destination_port_range     = "*"
+    destination_port_range     = "80"
     destination_address_prefix = "*"
   }
 
@@ -21,9 +21,9 @@ resource "azurerm_network_security_group" "backend_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Udp"
-    source_port_range          = "80"
+    source_port_range          = "*"
     source_address_prefixes    = var.clients_address_prefixes
-    destination_port_range     = "*"
+    destination_port_range     = "80"
     destination_address_prefix = "*"
   }
 
@@ -33,9 +33,9 @@ resource "azurerm_network_security_group" "backend_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
-    source_port_range          = "443"
+    source_port_range          = "*"
     source_address_prefixes    = var.clients_address_prefixes
-    destination_port_range     = "*"
+    destination_port_range     = "443"
     destination_address_prefix = "*"
   }
 
@@ -45,9 +45,9 @@ resource "azurerm_network_security_group" "backend_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Udp"
-    source_port_range          = "443"
+    source_port_range          = "*"
     source_address_prefixes    = var.clients_address_prefixes
-    destination_port_range     = "*"
+    destination_port_range     = "443"
     destination_address_prefix = "*"
   }
   
