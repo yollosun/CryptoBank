@@ -18,6 +18,22 @@ variable "admin_username" {
   type = string
 }
 
-variable "network_interface_ids" {
+variable "subnet_id" {
+  type = string
+}
+
+variable "public_key"{
+  type = string
+}
+
+variable "private_ip_address" {
+  type = string
+}
+
+variable "clients_address_prefixes" {
   type = list(string)
+}
+
+variable "port"{
+    type = string
 }
