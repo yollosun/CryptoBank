@@ -2,7 +2,17 @@ resource "azurerm_network_security_group" "database_nsg" {
   name                = "${var.name}-nsg"
   location            = var.location
   resource_group_name = var.resource_group_name
-
+  security_rule {
+    name                       = "allow-ssh"
+    priority                   = 300
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    source_address_prefix      = "0.0.0.0/0"
+    destination_port_range     = "22"
+    destination_address_prefix = "*"
+  }
   security_rule {
     name                       = "allow-servers-ips"
     priority                   = 100
@@ -16,6 +26,13 @@ resource "azurerm_network_security_group" "database_nsg" {
   }
 }
 
+resource "azurerm_public_ip" "db_public_ip" {
+  name                = "db_public_ip"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  allocation_method   = "Dynamic"
+}
+
 resource "azurerm_network_interface" "database_network_interface" {
   name                = "${var.name}_network_interface"
   location            = var.location
@@ -26,6 +43,8 @@ resource "azurerm_network_interface" "database_network_interface" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.private_ip_address
+
+    public_ip_address_id = azurerm_public_ip.db_public_ip.id
   }
 }
 

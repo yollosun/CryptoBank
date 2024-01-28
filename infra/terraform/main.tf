@@ -29,15 +29,6 @@ resource "azurerm_subnet_network_security_group_association" "subnet_nsg_associa
   network_security_group_id = module.shared_firewall.id
 }
 
-resource "tls_private_key" "private_key" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
-resource "local_file" "public_key" {
-  content  = tls_private_key.private_key.public_key_openssh
-  filename = "azure_ssh_key.pub"
-}
 
 module "backend_server_1" {
   source = "./modules/backend-server"
@@ -55,7 +46,7 @@ module "backend_server_1" {
   clients_address_prefixes = ["10.0.1.252/32"]
   database_address_prefix = "10.0.1.253/32"
 
-  public_key = "${local_file.public_key.content}"
+  public_key = file("./.ssh/id_rsa.pub")
 }
 
 module "database_server_1" {
@@ -74,7 +65,7 @@ module "database_server_1" {
   
   clients_address_prefixes = ["10.0.1.254/32"]
 
-  public_key = "${local_file.public_key.content}"
+  public_key = file("./.ssh/id_rsa.pub")
 }
 
 module "frontend_server_1" {
@@ -90,5 +81,5 @@ module "frontend_server_1" {
   subnet_id = azurerm_subnet.subnet.id
   private_ip_address = "10.0.1.252"
 
-  public_key = "${local_file.public_key.content}"
+  public_key = file("./.ssh/id_rsa.pub")
 }

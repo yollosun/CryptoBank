@@ -1,0 +1,14 @@
+---
+# tasks file for database
+
+- name: Update apt and install PostgreSQL
+  apt:
+    name: postgresql
+    state: present
+    update_cache: true
+
+- name: Start and enable service
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
